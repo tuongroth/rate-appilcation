@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Link } from 'react-router-native'; // Import Link for navigation
 import Constants from 'expo-constants';
 
@@ -33,6 +33,11 @@ const AppBar = () => {
         {/* Tab for Sign In */}
         <Link to="/sign-in">
           <Text style={styles.tab}>Sign In</Text>
+        </Link>
+
+        {/* Tab for Single Repository, Replace ID with dynamic ID */}
+        <Link to="/repository/jaredpalmer.formik">
+          <Text style={styles.tab}>Single Repository</Text>
         </Link>
       </ScrollView>
     </View>
