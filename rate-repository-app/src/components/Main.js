@@ -1,7 +1,9 @@
-// src/components/Main.jsx
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import RepositoryList from './RepositoryList';
+import { NativeRouter, Routes, Route } from 'react-router-native'; // Routing components
+import AppBar from './AppBar'; // Import AppBar component
+import RepositoryList from './RepositoryList'; // Import RepositoryList component
+import SignIn from './SignIn'; // Import SignIn component
 
 const styles = StyleSheet.create({
   container: {
@@ -11,9 +13,17 @@ const styles = StyleSheet.create({
 
 const Main = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <RepositoryList />
-    </SafeAreaView>
+    <NativeRouter>
+      <SafeAreaView style={styles.container}>
+        <AppBar /> {/* Display the AppBar component */}
+
+        <Routes>
+          {/* Define the routes */}
+          <Route path="/" element={<RepositoryList />} /> {/* Home view */}
+          <Route path="/sign-in" element={<SignIn />} /> {/* Sign-in view */}
+        </Routes>
+      </SafeAreaView>
+    </NativeRouter>
   );
 };
 
