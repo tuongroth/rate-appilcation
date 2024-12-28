@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { Link } from 'react-router-native'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-native'; // Import Link and useNavigate
 import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const navigate = useNavigate(); // Hook to programmatically navigate
+
+  const handleCreateReview = () => {
+    navigate('/create-review'); // Navigate to the ReviewForm route
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollView}>
@@ -35,10 +41,15 @@ const AppBar = () => {
           <Text style={styles.tab}>Sign In</Text>
         </Link>
 
-        {/* Tab for Single Repository, Replace ID with dynamic ID */}
+        {/* Tab for Single Repository */}
         <Link to="/repository/jaredpalmer.formik">
           <Text style={styles.tab}>Single Repository</Text>
         </Link>
+
+        {/* Button for Create a Review */}
+        <Pressable onPress={handleCreateReview}>
+          <Text style={styles.tab}>Create a Review</Text>
+        </Pressable>
       </ScrollView>
     </View>
   );

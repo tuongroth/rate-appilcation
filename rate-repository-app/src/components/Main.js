@@ -5,6 +5,7 @@ import AppBar from './AppBar'; // Import AppBar component
 import RepositoryList from './RepositoryList'; // Import RepositoryList component
 import SignIn from './SignIn'; // Import SignIn component
 import SingleRepository from './SingleRepository'; // Import SingleRepository component
+import ReviewForm from './ReviewForm'; // Import ReviewForm component
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +24,7 @@ const Main = () => {
           <Route path="/" element={<RepositoryList />} /> {/* Home view */}
           <Route path="/sign-in" element={<SignIn />} /> {/* Sign-in view */}
           <Route path="/repository/:id" element={<SingleRepository />} /> {/* Single repository view */}
+          <Route path="/create-review" element={<ReviewForm />} /> {/* Create Review view */}
         </Routes>
       </SafeAreaView>
     </NativeRouter>
