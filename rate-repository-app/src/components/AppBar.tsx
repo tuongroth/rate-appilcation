@@ -28,6 +28,10 @@ const AppBar = () => {
     navigate('/create-review'); // Navigate to the ReviewForm route
   };
 
+  const handleMyReviews = () => {
+    navigate('/my-reviews'); // Navigate to the MyReviews route
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollView}>
@@ -40,6 +44,16 @@ const AppBar = () => {
         <Link to="/sign-in">
           <Text style={styles.tab}>Sign In</Text>
         </Link>
+
+        {/* Tab for Sign Up */}
+        <Link to="/sign-up">
+          <Text style={styles.tab}>Sign Up</Text>
+        </Link>
+
+        {/* Tab for My Reviews */}
+        <Pressable onPress={handleMyReviews}>
+          <Text style={styles.tab}>My Reviews</Text>
+        </Pressable>
 
         {/* Tab for Single Repository */}
         <Link to="/repository/jaredpalmer.formik">
