@@ -5,7 +5,7 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   textInput: {
-    paddingVertical: 10,
+    paddingVertical: 10, ,d 
     paddingHorizontal: 15,
     borderWidth: 1,
     borderStyle: 'solid',
