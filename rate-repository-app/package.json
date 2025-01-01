@@ -6,13 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "rate-repository-app": "file:"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.1.3",
     "@types/react": "~18.2.45",
     "expo": "~50.0.17",
     "expo-status-bar": "~1.11.1",
+    "rate-repository-app": "file:",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
