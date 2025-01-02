@@ -1,69 +1,60 @@
-// src/components/RepositoryList.jsx
-import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  errorMessage: {
+    textAlign: 'center',
+    color: 'red',
+    marginTop: 20,
+  },
 });
-
-const repositories = [
-  {
-    id: 'jaredpalmer.formik',
-    fullName: 'jaredpalmer/formik',
-    description: 'Build forms in React, without the tears',
-    language: 'TypeScript',
-    forksCount: 1589,
-    stargazersCount: 21553,
-    ratingAverage: 88,
-    reviewCount: 4,
-    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/4060187?v=4',
-  },
-  {
-    id: 'rails.rails',
-    fullName: 'rails/rails',
-    description: 'Ruby on Rails',
-    language: 'Ruby',
-    forksCount: 18349,
-    stargazersCount: 45377,
-    ratingAverage: 100,
-    reviewCount: 2,
-    ownerAvatarUrl: 'https://avatars1.githubusercontent.com/u/4223?v=4',
-  },
-  {
-    id: 'django.django',
-    fullName: 'django/django',
-    description: 'The Web framework for perfectionists with deadlines.',
-    language: 'Python',
-    forksCount: 21015,
-    stargazersCount: 48496,
-    ratingAverage: 73,
-    reviewCount: 5,
-    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/27804?v=4',
-  },
-  {
-    id: 'reduxjs.redux',
-    fullName: 'reduxjs/redux',
-    description: 'Predictable state container for JavaScript apps',
-    language: 'TypeScript',
-    forksCount: 13902,
-    stargazersCount: 52869,
-    ratingAverage: 0,
-    reviewCount: 0,
-    ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
-  },
-];
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [repositories, setRepositories] = useState([]);
+
+  // Fetch repositories from the API
+  useEffect(() => {
+    const ipAddress = 'http://192.168.1.34:5000'; // Use the public IP address
+    const fetchRepositories = async () => {
+      try {
+        const response = await fetch(`${ipAddress}/api/repositories`);
+        if (response.ok) {
+          const json = await response.json();
+          setRepositories(json.edges); // Assuming the API returns the repositories in 'edges'
+        } else {
+          throw new Error('Unable to fetch repositories');
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRepositories();
+  }, []);
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return <Text style={styles.errorMessage}>{error}</Text>;
+  }
+
   return (
     <FlatList
-      data={repositories}
-      renderItem={({ item }) => <RepositoryItem repository={item} />}
-      keyExtractor={(item) => item.id}
+      data={repositories} // Use the repositories fetched from the API
+      renderItem={({ item }) => <RepositoryItem repository={item.node} />}
+      keyExtractor={(item) => item.node.id}
       ItemSeparatorComponent={ItemSeparator}
     />
   );
