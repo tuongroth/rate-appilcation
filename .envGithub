@@ -1,0 +1,7 @@
+Fix network connectivity and optimize ping response times
+
+- Improved ping function to handle network timeouts more efficiently.
+- Optimized the calculation and display of round trip times to ensure accurate latency measurements.
+- Fixed minor issue causing inaccurate timeouts in certain network conditions.
+- Enhanced error handling to prevent failure during intermittent network issues.
+- Updated documentation to reflect changes in network testing process.
