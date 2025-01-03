@@ -1,0 +1,27 @@
+Fix network connectivity and optimize ping response times
+
+- Improved ping function to handle network timeouts more efficiently.
+- Optimized the calculation and display of round trip times to ensure accurate latency measurements.
+- Fixed minor issue causing inaccurate timeouts in certain network conditions.
+- Enhanced error handling to prevent failure during intermittent network issues.
+- Updated documentation to reflect changes in network testing process.
+
+_rsa): .envGithub
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in .envGithub
+Your public key has been saved in .envGithub.pub
+The key fingerprint is:
+SHA256:2DLCq7IIqhHwohyniY9J6j0lAPX/CXsodKSqneVqBWg rothtrancattuong0703@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+| ..              |
+|.  .             |
+|o.  . .          |
+|oE.. + o         |
+|+.oo= B S        |
+|+o=+.= B .       |
+|==..* o +        |
+|BBo* . .         |
+|%=*oo            |
++----[SHA256]-----+
