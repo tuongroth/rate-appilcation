@@ -1,13 +1,15 @@
+name: Sample Workflow
+
 on:
- 
+  workflow_dispatch: # Chỉ cho phép chạy thủ công
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run script
-        run: echo "Hello from my scheduled job!"
+      - name: Print message
+        run: echo "Hello from manually triggered workflow!"
