@@ -1,23 +1,18 @@
-name: CI & CD
+name: Scheduled Workflow
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    # Cron job chạy lúc 12:00 trưa mỗi ngày
+    - cron: '0 12 * * *'  # Chạy lúc 12:00 trưa mỗi ngày
+  workflow_dispatch: # Cho phép chạy thủ công
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  
-      - name: Install dependencies
-        run: |
-          npm install
-          npm install -g expo-cli
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-     
-
-      - name: Build and Publish App to Expo
-        run: expo publish --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Print message
+        run: echo "Hello from scheduled workflow!"

@@ -1,62 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Text } from 'react-native';
-import RepositoryItem from './RepositoryItem';
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-  errorMessage: {
-    textAlign: 'center',
-    color: 'red',
-    marginTop: 20,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import { View, Text, ActivityIndicator } from 'react-native';
 
 const RepositoryList = () => {
+  const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [repositories, setRepositories] = useState([]);
 
-  // Fetch repositories from the API
   useEffect(() => {
-    const ipAddress = 'http://192.168.1.34:5000'; // Use the public IP address
+    // Hàm fetch để lấy dữ liệu từ API
     const fetchRepositories = async () => {
       try {
-        const response = await fetch(`${ipAddress}/api/repositories`);
-        if (response.ok) {
-          const json = await response.json();
-          setRepositories(json.edges); // Assuming the API returns the repositories in 'edges'
-        } else {
-          throw new Error('Unable to fetch repositories');
+        // Gửi yêu cầu đến API với URL chính xác
+        const response = await fetch('http://10.32.9.199:5000/api/repositories');
+        
+        if (!response.ok) {
+          throw new Error('Lỗi khi lấy dữ liệu từ server');
         }
+
+        // Chuyển đổi phản hồi từ server sang định dạng JSON
+        const data = await response.json();
+        setRepositories(data.edges); // Lấy dữ liệu repository từ `edges`
       } catch (err) {
-        setError(err.message);
+        setError(err.message); // Xử lý lỗi nếu có
       } finally {
-        setLoading(false);
+        setLoading(false); // Đánh dấu hoàn thành việc lấy dữ liệu
       }
     };
 
     fetchRepositories();
-  }, []);
+  }, []); // Chỉ gọi một lần khi component được render
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
   if (error) {
-    return <Text style={styles.errorMessage}>{error}</Text>;
+    return <Text>Lỗi: {error}</Text>;
   }
 
   return (
-    <FlatList
-      data={repositories} // Use the repositories fetched from the API
-      renderItem={({ item }) => <RepositoryItem repository={item.node} />}
-      keyExtractor={(item) => item.node.id}
-      ItemSeparatorComponent={ItemSeparator}
-    />
+    <View>
+      {repositories.map((repo) => (
+        <View key={repo.node.id}>
+          <Text>{repo.node.name}</Text>
+          <Text>{repo.node.description}</Text>
+        </View>
+      ))}
+    </View>
   );
 };
 

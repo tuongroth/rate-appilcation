@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, StyleSheet, FlatList, Linking } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
 import { useParams } from 'react-router-native'; // To access the route parameters
 
 // Placeholder function to fetch repository and reviews data (Replace with actual GraphQL query)
@@ -53,7 +53,6 @@ const RepositoryInfo = ({ repository }) => {
       <Text style={styles.repoDescription}>{repository.description}</Text>
       <Text style={styles.repoLanguage}>Language: {repository.language}</Text>
       <Text style={styles.repoStats}>⭐ {repository.stars.toLocaleString()} Stars 🍴 {repository.forks.toLocaleString()} Forks</Text>
-      <Button title="Open in GitHub" onPress={() => Linking.openURL(repository.url)} />
     </View>
   );
 };
@@ -195,4 +194,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingleRepository; 
+export default SingleRepository;
