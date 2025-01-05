@@ -8,22 +8,22 @@ const fetchRepositoryData = (id) => {
     setTimeout(() => {
       resolve({
         id,
-        fullName: "jaredpalmer.formik",
-        description: "Form management for React",
-        url: `https://github.com/${id}`,
+        fullName: "tuongroth/fullstackopen2024", // Update full name here
+        description: "Fullstack Open 2024 repository",
+        url: `https://github.com/tuongroth/fullstackopen2024`, // Direct URL to the specific GitHub repository
         owner: {
-          login: "jaredpalmer",
+          login: "tuongroth",
           avatarUrl: "https://avatars.githubusercontent.com/u/78794?v=4",
         },
         stars: 10400,
         forks: 1200,
-        language: "TypeScript",
+        language: "JavaScript",
         reviews: {
           edges: [
             {
               node: {
                 id: '1',
-                text: 'Great library for handling forms in React!',
+                text: 'Great resource for full-stack development!',
                 rating: 90,
                 createdAt: '2023-10-01T12:00:00Z',
                 user: { id: 'u1', username: 'john_doe' },
@@ -32,7 +32,7 @@ const fetchRepositoryData = (id) => {
             {
               node: {
                 id: '2',
-                text: 'Very useful and easy to integrate.',
+                text: 'A comprehensive guide to modern web development.',
                 rating: 85,
                 createdAt: '2023-09-15T14:00:00Z',
                 user: { id: 'u2', username: 'jane_doe' },
@@ -53,7 +53,23 @@ const RepositoryInfo = ({ repository }) => {
       <Text style={styles.repoDescription}>{repository.description}</Text>
       <Text style={styles.repoLanguage}>Language: {repository.language}</Text>
       <Text style={styles.repoStats}>⭐ {repository.stars.toLocaleString()} Stars 🍴 {repository.forks.toLocaleString()} Forks</Text>
-      <Button title="Open in GitHub" onPress={() => Linking.openURL(repository.url)} />
+      
+      {/* Nút chuyển đến GitHub */}
+      <Button 
+        title="Open in GitHub" 
+        onPress={() => {
+          const url = repository.url; // Lấy URL từ repository
+          Linking.canOpenURL(url)
+            .then((supported) => {
+              if (supported) {
+                return Linking.openURL(url);
+              } else {
+                console.log("Don't know how to open URI: " + url);
+              }
+            })
+            .catch((err) => console.error('An error occurred', err));
+        }} 
+      />
     </View>
   );
 };
@@ -195,4 +211,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingleRepository; 
+export default SingleRepository;

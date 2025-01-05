@@ -1,68 +1,82 @@
-// src/components/RepositoryList.jsx
-import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import RepositoryItem from './RepositoryItem';
+// RepositoryList.js
 
+import React from 'react';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import useRepositories from '../hooks/useRepositories';  // Import the custom hook
+
+// Define styles
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  infoContainer: {
+    marginLeft: 10,
+  },
+  fullName: {
+    fontWeight: 'bold',
+  },
+  description: {
+    marginVertical: 5,
+  },
+  language: {
+    fontSize: 12,
+    color: 'gray',
+  },
   separator: {
     height: 10,
   },
+  loadingText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 18,
+  },
 });
 
-const repositories = [
-  {
-    id: 'jaredpalmer.formik',
-    fullName: 'jaredpalmer/formik',
-    description: 'Build forms in React, without the tears',
-    language: 'TypeScript',
-    forksCount: 1589,
-    stargazersCount: 21553,
-    ratingAverage: 88,
-    reviewCount: 4,
-    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/4060187?v=4',
-  },
-  {
-    id: 'rails.rails',
-    fullName: 'rails/rails',
-    description: 'Ruby on Rails',
-    language: 'Ruby',
-    forksCount: 18349,
-    stargazersCount: 45377,
-    ratingAverage: 100,
-    reviewCount: 2,
-    ownerAvatarUrl: 'https://avatars1.githubusercontent.com/u/4223?v=4',
-  },
-  {
-    id: 'django.django',
-    fullName: 'django/django',
-    description: 'The Web framework for perfectionists with deadlines.',
-    language: 'Python',
-    forksCount: 21015,
-    stargazersCount: 48496,
-    ratingAverage: 73,
-    reviewCount: 5,
-    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/27804?v=4',
-  },
-  {
-    id: 'reduxjs.redux',
-    fullName: 'reduxjs/redux',
-    description: 'Predictable state container for JavaScript apps',
-    language: 'TypeScript',
-    forksCount: 13902,
-    stargazersCount: 52869,
-    ratingAverage: 0,
-    reviewCount: 0,
-    ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
-  },
-];
-
+// Separator between items in the list
 const ItemSeparator = () => <View style={styles.separator} />;
 
+// Main component to display the list of repositories
 const RepositoryList = () => {
+  const { repositories, loading, error } = useRepositories();  // Use the custom hook
+
+  // If data is still loading
+  if (loading) {
+    return (
+      <View>
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
+
+  // If there was an error fetching the data
+  if (error) {
+    return (
+      <View>
+        <Text style={styles.loadingText}>Error: {error}</Text>
+      </View>
+    );
+  }
+
+  // Render the list of repositories
   return (
     <FlatList
-      data={repositories}
-      renderItem={({ item }) => <RepositoryItem repository={item} />}
+      data={repositories}  // Use the fetched repositories
+      renderItem={({ item }) => (
+        <View style={styles.container}>
+          <Image source={{ uri: item.ownerAvatarUrl }} style={styles.avatar} />
+          <View style={styles.infoContainer}>
+            <Text style={styles.fullName}>{item.fullName}</Text>
+            <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.language}>{item.language}</Text>
+          </View>
+        </View>
+      )}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={ItemSeparator}
     />

@@ -34,12 +34,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 10,
   },
+  errorMessage: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 20,
+  },
 });
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState(null); // State để lưu lỗi đăng nhập
 
   const validate = () => {
     const newErrors = {};
@@ -50,13 +57,36 @@ const SignIn = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validate()) {
       console.log({ username, password });
-      // Reset form or perform additional actions after successful validation
-      setUsername('');
-      setPassword('');
-      setErrors({});
+      try {
+        const response = await fetch('https://eu-west-2.aws.services.cloud.mongodb.com/api/client/v2.0/app/data-zbmnuij/auth/providers/local-userpass/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Xử lý nếu đăng nhập thành công
+          console.log('Login Successful: ', data);
+          setLoginError(null); // Xóa lỗi nếu có
+          setUsername('');
+          setPassword('');
+        } else {
+          // Xử lý khi đăng nhập thất bại
+          setLoginError(data.error || 'Login failed');
+        }
+      } catch (error) {
+        setLoginError('An error occurred: ' + error.message);
+      }
     }
   };
 
@@ -87,9 +117,11 @@ const SignIn = () => {
       <View style={styles.buttonContainer}>
         <Button title="Sign In" onPress={handleSubmit} />
       </View>
+
+      {/* Error Message */}
+      {loginError && <Text style={styles.errorMessage}>{loginError}</Text>}
     </View>
   );
 };
 
 export default SignIn;
-

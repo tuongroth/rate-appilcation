@@ -25,7 +25,6 @@ const MyReviews = () => {
       <Text style={styles.title}>My Reviews</Text>
       <Text style={styles.reviewText}>Review 1: This is a great app!</Text>
       <Text style={styles.reviewText}>Review 2: Very helpful and easy to use.</Text>
-      <Text style={styles.reviewText}>Review 3: I love the design and functionality.</Text>
     </View>
   );
 };
