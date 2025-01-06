@@ -1,90 +1,14 @@
-name: CI/CD Pipeline with Notifications
-
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron: '5 10 * * *' # Chạy lúc 10:05 sáng hàng ngày
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the code from the repository
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up Node.js environment (modify for other languages)
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Optional: Run tests (you can remove this if not needed)
-      - name: Run tests
-        run: npm test
-
-      # Notify success
-      - name: Notify success
-        if: ${{ success() }}
-        uses: Ilshidur/action-discord@v2
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            ✅ **Build Succeeded!**
-            A new version has been deployed successfully.
-            - **Commit:** ${{ github.sha }}
-            - **Branch:** ${{ github.ref_name }}
-            - **Triggered by:** ${{ github.actor }}
-
-      # Notify failure
-      - name: Notify failure
-        if: ${{ failure() }}
-        uses: Ilshidur/action-discord@v2
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            ❌ **Build Failed!**
-            An error occurred during the build process.
-            - **Commit:** ${{ github.sha }}
-            - **Branch:** ${{ github.ref_name }}
-            - **Triggered by:** ${{ github.actor }}
-            - **Error Logs:** Please check the build logs in Actions tab.
-
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'  # Only deploy from main branch
-
-    steps:
-      # Check out the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Run deployment script
-      - name: Deploy Application
-        run: |
-          echo "Deploying application..."
-          # Add your actual deployment commands here
-
-    if: github.ref == 'refs/heads/main'  # Only deploy from main branch
-
-    steps:
-      # Check out the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Run deployment script
-      - name: Deploy Application
-        run: |
-          echo "Deploying application..."
-          # Add your actual deployment commands here
+      - name: Run script
+        run: echo "Hello from my scheduled job!"

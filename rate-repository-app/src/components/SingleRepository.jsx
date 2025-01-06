@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, StyleSheet, FlatList, Linking } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
 import { useParams } from 'react-router-native'; // To access the route parameters
 
 // Placeholder function to fetch repository and reviews data (Replace with actual GraphQL query)
@@ -53,23 +53,7 @@ const RepositoryInfo = ({ repository }) => {
       <Text style={styles.repoDescription}>{repository.description}</Text>
       <Text style={styles.repoLanguage}>Language: {repository.language}</Text>
       <Text style={styles.repoStats}>⭐ {repository.stars.toLocaleString()} Stars 🍴 {repository.forks.toLocaleString()} Forks</Text>
-      
-      {/* Nút chuyển đến GitHub */}
-      <Button 
-        title="Open in GitHub" 
-        onPress={() => {
-          const url = repository.url; // Lấy URL từ repository
-          Linking.canOpenURL(url)
-            .then((supported) => {
-              if (supported) {
-                return Linking.openURL(url);
-              } else {
-                console.log("Don't know how to open URI: " + url);
-              }
-            })
-            .catch((err) => console.error('An error occurred', err));
-        }} 
-      />
+      <Button title="Open in GitHub" onPress={() => Linking.openURL(repository.url)} />
     </View>
   );
 };
