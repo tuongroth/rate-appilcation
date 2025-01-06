@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -60,29 +60,38 @@ const SignIn = () => {
   const handleSubmit = async () => {
     if (validate()) {
       console.log({ username, password });
+
+      // GraphQL query for login
+      const query = `
+        mutation {
+          login(username: "${username}", password: "${password}") {
+            token
+          }
+        }
+      `;
+
       try {
-        const response = await fetch('https://eu-west-2.aws.services.cloud.mongodb.com/api/client/v2.0/app/data-zbmnuij/auth/providers/local-userpass/login', {
+        const response = await fetch('http://localhost:4000/', {  // Sửa URL
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username: username,
-            password: password,
+            query: query,
           }),
         });
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (response.ok && data.data && data.data.login) {
           // Xử lý nếu đăng nhập thành công
-          console.log('Login Successful: ', data);
+          console.log('Login Successful: ', data.data.login.token);
           setLoginError(null); // Xóa lỗi nếu có
           setUsername('');
           setPassword('');
         } else {
           // Xử lý khi đăng nhập thất bại
-          setLoginError(data.error || 'Login failed');
+          setLoginError(data.errors ? data.errors[0].message : 'Login failed');
         }
       } catch (error) {
         setLoginError('An error occurred: ' + error.message);

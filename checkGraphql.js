@@ -1,6 +1,9 @@
 // Import các thư viện cần thiết từ Apollo Server
 const { ApolloServer } = require('@apollo/server');
 const { startStandaloneServer } = require('@apollo/server/standalone');
+const jwt = require('jsonwebtoken'); // Thư viện để tạo token
+
+const SECRET_KEY = 'your_secret_key'; // Khóa bí mật để ký token
 
 // Định nghĩa schema GraphQL (typeDefs)
 const typeDefs = `
@@ -8,6 +11,10 @@ const typeDefs = `
     hello: String
     users: [User]
     repositories: [Repository]
+  }
+
+  type Mutation {
+    login(username: String!, password: String!): LoginResponse
   }
 
   type User {
@@ -26,7 +33,17 @@ const typeDefs = `
     reviewCount: Int
     ownerAvatarUrl: String
   }
+
+  type LoginResponse {
+    token: String
+  }
 `;
+
+// Mock dữ liệu người dùng
+const users = [
+  { id: '1', username: 'kalle', password: 'password123' },
+  { id: '2', username: 'elina', password: 'password456' },
+];
 
 // Mock dữ liệu repository
 const repositories = [
@@ -76,15 +93,26 @@ const repositories = [
   },
 ];
 
-// Định nghĩa resolvers cho các truy vấn
+// Định nghĩa resolvers cho các truy vấn và mutation
 const resolvers = {
   Query: {
     hello: () => 'Hello, world!',
-    users: () => [
-      { id: '1', username: 'kalle' },
-      { id: '2', username: 'elina' },
-    ],
+    users: () => users.map(({ password, ...user }) => user), // Không trả về password
     repositories: () => repositories, // Trả về danh sách repository
+  },
+  Mutation: {
+    login: (_, { username, password }) => {
+      // Kiểm tra thông tin đăng nhập
+      const user = users.find((user) => user.username === username && user.password === password);
+      if (!user) {
+        throw new Error('Invalid username or password');
+      }
+
+      // Tạo token nếu thông tin đăng nhập hợp lệ
+      const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+
+      return { token };
+    },
   },
 };
 
