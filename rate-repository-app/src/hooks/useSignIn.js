@@ -1,40 +1,45 @@
-import { useMutation } from '@apollo/client';
 import { useState } from 'react';
-import { gql } from '@apollo/client';
-import AuthStorage from '../utils/authStorage';
-
-// GraphQL mutation để xác thực
-const AUTHENTICATE_USER = gql`
-  mutation authenticate($credentials: AuthenticateInput!) {
-    authenticate(credentials: $credentials) {
-      accessToken
-    }
-  }
-`;
 
 const useSignIn = () => {
-  const [mutate, { loading, error, data }] = useMutation(AUTHENTICATE_USER);
-  const [signInError, setSignInError] = useState(null);
-  const authStorage = new AuthStorage();
+  const [loginError, setLoginError] = useState(null);
 
   const signIn = async ({ username, password }) => {
+    const query = `
+      mutation {
+        login(username: "${username}", password: "${password}") {
+          token
+        }
+      }
+    `;
+
     try {
-      const { data } = await mutate({
-        variables: { credentials: { username, password } },
+      const response = await fetch('http://localhost:4000/', {  // Update URL if needed
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: query,
+        }),
       });
 
-      if (data && data.authenticate && data.authenticate.accessToken) {
-        // Lưu token vào AsyncStorage
-        await authStorage.setAccessToken(data.authenticate.accessToken);
+      const data = await response.json();
+
+      if (response.ok && data.data && data.data.login) {
+        // Return token if login successful
+        return { token: data.data.login.token };
+      } else {
+        // Set error message if login fails
+        setLoginError(data.errors ? data.errors[0].message : 'Login failed');
+        return null;
       }
-      return data;
-    } catch (e) {
-      setSignInError(e.message);
-      console.error("Sign-in Error: ", e);
+    } catch (error) {
+      setLoginError('An error occurred: ' + error.message);
+      return null;
     }
   };
 
-  return { signIn, loading, error: signInError || error, data };
+  return [signIn, loginError];
 };
 
 export default useSignIn;

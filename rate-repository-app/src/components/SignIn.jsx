@@ -1,6 +1,69 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import useSignIn from '../hooks/useSignIn'; // Import the custom hook
 
+const SignIn = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
+  const [signIn, loginError] = useSignIn(); // Use the custom hook
+
+  const validate = () => {
+    const newErrors = {};
+    if (!username.trim()) newErrors.username = 'Username is required';
+    if (!password.trim()) newErrors.password = 'Password is required';
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (validate()) {
+      const result = await signIn({ username, password });
+
+      if (result) {
+        console.log('Login Successful: ', result.token);
+        setUsername('');
+        setPassword('');
+      }
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Sign In</Text>
+
+      {/* Username Field */}
+      <TextInput
+        style={[styles.input, errors.username ? styles.inputError : null]}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
+
+      {/* Password Field */}
+      <TextInput
+        style={[styles.input, errors.password ? styles.inputError : null]}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
+      {/* Submit Button */}
+      <View style={styles.buttonContainer}>
+        <Button title="Sign In" onPress={handleSubmit} />
+      </View>
+
+      {/* Error Message */}
+      {loginError && <Text style={styles.errorMessage}>{loginError}</Text>}
+    </View>
+  );
+};
+
+// Styles integrated in the same file
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,96 +104,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-
-const SignIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
-  const [loginError, setLoginError] = useState(null); // State để lưu lỗi đăng nhập
-
-  const validate = () => {
-    const newErrors = {};
-    if (!username.trim()) newErrors.username = 'Username is required';
-    if (!password.trim()) newErrors.password = 'Password is required';
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async () => {
-    if (validate()) {
-      console.log({ username, password });
-
-      // GraphQL query for login
-      const query = `
-        mutation {
-          login(username: "${username}", password: "${password}") {
-            token
-          }
-        }
-      `;
-
-      try {
-        const response = await fetch('http://localhost:4000/', {  // Sửa URL
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query: query,
-          }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.data && data.data.login) {
-          // Xử lý nếu đăng nhập thành công
-          console.log('Login Successful: ', data.data.login.token);
-          setLoginError(null); // Xóa lỗi nếu có
-          setUsername('');
-          setPassword('');
-        } else {
-          // Xử lý khi đăng nhập thất bại
-          setLoginError(data.errors ? data.errors[0].message : 'Login failed');
-        }
-      } catch (error) {
-        setLoginError('An error occurred: ' + error.message);
-      }
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
-
-      {/* Username Field */}
-      <TextInput
-        style={[styles.input, errors.username ? styles.inputError : null]}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
-
-      {/* Password Field */}
-      <TextInput
-        style={[styles.input, errors.password ? styles.inputError : null]}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-
-      {/* Submit Button */}
-      <View style={styles.buttonContainer}>
-        <Button title="Sign In" onPress={handleSubmit} />
-      </View>
-
-      {/* Error Message */}
-      {loginError && <Text style={styles.errorMessage}>{loginError}</Text>}
-    </View>
-  );
-};
 
 export default SignIn;
