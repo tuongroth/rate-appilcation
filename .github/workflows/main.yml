@@ -1,18 +1,65 @@
-name: Scheduled Workflow
+name: CI/CD Pipeline
 
 on:
-  schedule:
-    # Cron job chạy lúc 12:00 trưa mỗi ngày
-    - cron: '0 12 * * *'  # Chạy lúc 12:00 trưa mỗi ngày
-  workflow_dispatch: # Cho phép chạy thủ công
+  push:
+    branches:
+      - main  # Hoặc tên branch bạn muốn deploy
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Print message
-        run: echo "Hello from scheduled workflow!"
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+          cd ../frontend
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd backend
+          npm test
+          cd ../frontend
+          npm test
+
+      - name: Build the Application
+        run: |
+          cd backend
+          npm run build
+          cd ../frontend
+          npm run build
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production..."
+          # Thêm lệnh deploy của bạn tại đây
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Notify via Discord on Success
+        if: success()
+        uses: peter-evans/discord-webhook-notify@v2
+        with:
+          url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: "Deployment Successful: New version has been deployed."
+
+      - name: Notify via Discord on Failure
+        if: failure()
+        uses: peter-evans/discord-webhook-notify@v2
+        with:
+          url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: |
+            "Deployment Failed: There was an error during the build or deployment.
+             Commit: ${{ github.sha }}
+             Error: ${{ job.status }}"
