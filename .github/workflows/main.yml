@@ -1,65 +1,26 @@
-name: CI/CD Pipeline
+name: Discord Notification
 
 on:
   push:
     branches:
-      - main  # Hoặc tên branch bạn muốn deploy
+      - main
 
 jobs:
-  build:
+  notify-discord:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install Dependencies
-        run: |
-          cd backend
-          npm install
-          cd ../frontend
-          npm install
-
-      - name: Run Tests
-        run: |
-          cd backend
-          npm test
-          cd ../frontend
-          npm test
-
-      - name: Build the Application
-        run: |
-          cd backend
-          npm run build
-          cd ../frontend
-          npm run build
-
-      - name: Deploy to Production
-        run: |
-          echo "Deploying to production..."
-          # Thêm lệnh deploy của bạn tại đây
-
-  notify:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Notify via Discord on Success
+      - name: Send success notification
         if: success()
-        uses: peter-evans/discord-webhook-notify@v2
-        with:
-          url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: "Deployment Successful: New version has been deployed."
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d '{"content": "✅ Deployment succeeded! Check your app now!"}' \
+           https://discord.com/api/webhooks/1326616309609529404/jW9CVDmaXlCDpbOdtyCMXd3NoxHsp2iME6mJSRLa65j_TYigPbniqqo7a5HrGngD-EUj
 
-      - name: Notify via Discord on Failure
+      - name: Send failure notification
         if: failure()
-        uses: peter-evans/discord-webhook-notify@v2
-        with:
-          url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: |
-            "Deployment Failed: There was an error during the build or deployment.
-             Commit: ${{ github.sha }}
-             Error: ${{ job.status }}"
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d '{"content": "❌ Deployment failed! Please check the logs for details."}' \
+            https://discord.com/api/webhooks/1326616309609529404/jW9CVDmaXlCDpbOdtyCMXd3NoxHsp2iME6mJSRLa65j_TYigPbniqqo7a5HrGngD-EUj
