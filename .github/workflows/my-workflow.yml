@@ -1,15 +1,16 @@
-name: Sample Workflow
+name: Health Check
 
 on:
-  workflow_dispatch: # Chỉ cho phép chạy thủ công
+  schedule:
+    - cron: '0 0 * * *' # Chạy mỗi ngày vào lúc 00:00 UTC
+  workflow_dispatch: # Chạy thủ công khi cần
 
 jobs:
-  build:
+  health-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Print message
-        run: echo "Hello from manually triggered workflow!"
+      - name: Health check request
+        uses: jakejarvis/url-health-check@v1
+        with:
+          url: 'https://ba0f-31-216-224-152.ngrok-free.app/health'  # Thay thế bằng URL thực của bạn
