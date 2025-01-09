@@ -26,4 +26,4 @@ jobs:
       - name: Deploy to Fly.io
         run: flyctl deploy
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FlyV1 fm2_lJPECAAAAAAAAtZjxBC8ZUZS1JxiLYuADMrYglVMwrVodHRwczovL2FwaS5mbHkuaW8vdjGWAJLOAAvojR8Lk7lodHRwczovL2FwaS5mbHkuaW8vYWFhL3YxxDxldbzgVhZjCKBg7GcsMpCeVII0q0LRKCU/4/DFeY7RpeTtr7jPOOVv7E2p3wKKgYsP/+sRY0o0QWPCvS3ETr8wcZ+IEu883X/PSxKjb3ddV5cUTV17/VFqmMDgKzszeKfNkXC4vnk6S/vnHVzd3jgwuCQO8fhsT1wJ3Ki5sfjeIXiG78UbfBPPUscGPA2SlAORgc4AXawEHwWRgqdidWlsZGVyH6J3Zx8BxCDjOyaPtO9JbQSn8RZaSPqJbuD5FDxZjuOmpXextOqh6Q==,fm2_lJPETr8wcZ+IEu883X/PSxKjb3ddV5cUTV17/VFqmMDgKzszeKfNkXC4vnk6S/vnHVzd3jgwuCQO8fhsT1wJ3Ki5sfjeIXiG78UbfBPPUscGPMQQFHmyP8+GbfN47DV++2Wy+cO5aHR0cHM6Ly9hcGkuZmx5LmlvL2FhYS92MZgEks5nf80jzmePLsEXzgALkyIKkc4AC5MiDMQQW1qj+6zR60m6VDKDrongoMQgL9gss7w3Q2YSbFW719LxrlgHnSwg+B4jVYusw5hnrI0= }}
