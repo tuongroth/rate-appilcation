@@ -3,27 +3,20 @@ name: Deploy to Fly.io
 on:
   push:
     branches:
-      - main  # Triển khai khi có thay đổi trên nhánh chính
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+    - name: Set up Fly.io CLI
+      uses: superfly/flyctl-actions/setup-flyctl@v1
 
-      - name: Install dependencies
-        run: npm install
+    - name: Deploy to Fly.io
+      run: |
+        flyctl auth login --access-token ${{ secrets.FLY_API_TOKEN }}
+        flyctl deploy
 
-      - name: Build application
-        run: npm run build
-
-      - name: Deploy to Fly.io
-        run: flyctl deploy
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
