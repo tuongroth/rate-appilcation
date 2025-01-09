@@ -2,12 +2,33 @@
 
 ## Project Overview
 
-**Title:** Your Project Title Here
+Purpose:
+This project is designed to assist individuals in navigating and overcoming moments of "freeze" or decision paralysis, where progress feels impossible. By implementing an efficient and low-cost system for task management, it enhances productivity, minimizes delays, and improves mental health. The approach focuses on breaking complex challenges into manageable, asynchronous tasks to maintain progress and reduce stress.
 
-**Purpose:**
-Describe the purpose of your application, such as:
-- "This application allows users to manage tasks with CRUD functionalities and integrates real-time notifications."
-- "This project aims to support small groups in organizing collaborative work efficiently."
+Core Features:
+Asynchronous Task Handling:
+
+Tasks are managed out of order, prioritizing easy-to-complete actions first to maintain momentum.
+Incorporates real-time file updates to adapt to ongoing needs effectively.
+Progress Visualization:
+
+Tracks progress in real time, offering a clear picture of completed and pending tasks.
+Includes feedback or reviews from authorities to ensure validation and guidance.
+Low-Effort Workflow:
+
+Reduces energy and time costs by breaking tasks into independent, incremental layers.
+Ensures that tasks remain manageable and do not overwhelm users.
+Adaptive Timeline:
+
+Dynamically adjusts to real-world challenges, helping users transition from a "slow" to "speed" state.
+Especially beneficial for long-term PTSD or other mental health conditions that impact consistency.
+User-Friendly Interface:
+
+Simplified design ensures accessibility for users of all backgrounds, including those without technical expertise.
+Mental Health Support:
+
+Integrates anxiety-reducing strategies and helps users avoid decision paralysis.
+Encourages healthier workflows and promotes confidence in managing tasks effectively.
 
 **Core Features:**
 - User authentication (login, registration).
@@ -25,7 +46,7 @@ Describe the purpose of your application, such as:
 
 ## Live Demo
 
-- **Frontend:** [https://your-app-name.netlify.app](https://your-app-name.netlify.app)
+- **Frontend:** [https://your-app-name.netlify.app]([https://your-app-name.netlify.app](https://rate-appilcation.fly.dev/))
 - **Backend API:** [https://your-backend.herokuapp.com](https://your-backend.herokuapp.com)
 
 ---
@@ -50,7 +71,7 @@ Describe the purpose of your application, such as:
 
 ## Work Hours Log
 
-[Work Hours Log](link-to-hours-log.md)
+[Work Hours Log]([link-to-hours-log.md](https://drive.google.com/drive/u/0/home))
 
 - **Total Hours Spent:** XX hours
 - **Breakdown:**
