@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, Linking, Button } from 'react-native';
 import { useParams } from 'react-router-native'; // To access the route parameters
 
-// Placeholder function to fetch repository and reviews data (Replace with actual GraphQL query)
+// Simulated fetchRepositoryData function for fetching repository and review data
 const fetchRepositoryData = (id) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -18,30 +18,52 @@ const fetchRepositoryData = (id) => {
         stars: 10400,
         forks: 1200,
         language: "JavaScript",
-        reviews: {
-          edges: [
-            {
-              node: {
-                id: '1',
-                text: 'Great resource for full-stack development!',
-                rating: 90,
-                createdAt: '2023-10-01T12:00:00Z',
-                user: { id: 'u1', username: 'john_doe' },
-              },
-            },
-            {
-              node: {
-                id: '2',
-                text: 'A comprehensive guide to modern web development.',
-                rating: 85,
-                createdAt: '2023-09-15T14:00:00Z',
-                user: { id: 'u2', username: 'jane_doe' },
-              },
-            },
-          ],
-        },
+        reviews: [
+          {
+            date: "2024-08-24",
+            event: "Encouragement on IT Study",
+            description: "I remember that you have told me your ideas about IT study. I encourage you because it is your internal desire!",
+            notes: "Keep pushing forward!"
+          },
+          {
+            date: "2024-09-10",
+            event: "Recovery Progress",
+            description: "You are really strong, signs of recovery are evident, and you're not late anymore. Better to keep boundaries.",
+            notes: "You're on the right path."
+          },
+          {
+            date: "2024-10-05",
+            event: "Encouragement to Continue Coding",
+            description: "I think you should continue to do this because you like it and are good at it. Do you like writing the code? Additional comment: Are you referring to your friends and family?",
+            notes: "Keep it up!"
+          },
+          {
+            date: "2024-10-31",
+            event: "Recognition of Independence",
+            description: "You are so independent. You have your own IP address to fetch correct output and not rely on other opinions.",
+            notes: "You're becoming more self-sufficient."
+          },
+          {
+            date: "2024-11-02",
+            event: "Boss Appreciation",
+            description: "You are number 1 at speed, still late at work but handle so quickly.",
+            notes: "Fast and efficient!"
+          },
+          {
+            date: "2024-11-06",
+            event: "Mental Health Improvement",
+            description: "You’re not a child anymore. You know what’s best for your mental health, and I’m proud of you.",
+            notes: "Great progress!"
+          },
+          {
+            date: "2024-11-12",
+            event: "IT Education Completed",
+            description: "Completed foundational IT education, preparing for professional application. You have your IP as a safe environment.",
+            notes: "Well done!"
+          }
+        ]
       });
-    }, 1000);
+    }, 1000); // Simulate a delay
   });
 };
 
@@ -61,12 +83,10 @@ const RepositoryInfo = ({ repository }) => {
 const ReviewItem = ({ review }) => {
   return (
     <View style={styles.reviewItem}>
-      <Text style={styles.reviewUser}>{review.user.username}</Text>
-      <Text style={styles.reviewText}>{review.text}</Text>
-      <View style={styles.ratingContainer}>
-        <Text style={styles.rating}>{review.rating}</Text>
-      </View>
-      <Text style={styles.reviewDate}>{review.createdAt}</Text>
+      <Text style={styles.reviewEvent}>{review.event}</Text>
+      <Text style={styles.reviewDescription}>{review.description || 'No description available'}</Text>
+      <Text style={styles.reviewNotes}>{review.notes}</Text>
+      <Text style={styles.reviewDate}>{review.date}</Text>
     </View>
   );
 };
@@ -90,8 +110,8 @@ const SingleRepository = () => {
     );
   }
 
-  // Map reviews to extract node data
-  const reviews = repository.reviews.edges.map((edge) => edge.node);
+  // Trích xuất reviews
+  const reviews = repository.reviews;
 
   return (
     <View style={styles.container}>
@@ -101,7 +121,7 @@ const SingleRepository = () => {
       <FlatList
         data={reviews}
         renderItem={({ item }) => <ReviewItem review={item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()} // Using index as the key
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListHeaderComponent={() => <Text style={styles.reviewsHeader}>Reviews</Text>}
       />
@@ -156,27 +176,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
   },
-  reviewUser: {
+  reviewEvent: {
     fontSize: 16,
     fontWeight: 'bold',
   },
-  reviewText: {
+  reviewDescription: {
     fontSize: 14,
     marginVertical: 5,
     color: '#555',
   },
-  ratingContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#f39c12',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rating: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
+  reviewNotes: {
+    fontSize: 14,
+    color: '#444',
+    marginVertical: 5,
   },
   reviewDate: {
     fontSize: 12,
@@ -196,3 +208,4 @@ const styles = StyleSheet.create({
 });
 
 export default SingleRepository;
+
