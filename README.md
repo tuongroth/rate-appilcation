@@ -31,17 +31,12 @@
   - Encourages healthier workflows and promotes confidence in managing tasks effectively.
 
 **Technology Stack:**
-- **Frontend:** React (or your choice of framework).
-- **Backend:** Node.js with Express (or an alternative backend technology).
-- **Database:** MongoDB (or your choice of database).
+- **Frontend:** React Vite
+- **Backend:** Node.js Axious
+- **Database:** MongoDB 
 - **Deployment:** Frontend on Netlify or Vercel; Backend on Heroku or Render.
 
 ---
-
-## Live Demo
-
-- **Frontend:** [https://your-app-name.netlify.app](https://your-app-name.netlify.app)
-- **Backend API:** [https://your-backend.herokuapp.com](https://your-backend.herokuapp.com)
 
 ---
 
@@ -50,8 +45,8 @@
 1. **Access the Application:**
    - Visit the frontend link provided above.
    - For demo purposes, use the following credentials:
-     - **Email:** demo@example.com
-     - **Password:** demo123
+     - **Email:** kella
+     - **Password:** password124
 
 2. **Key Features:**
    - Register and log in as a new user.
