@@ -2,12 +2,12 @@
 
 ## Project Overview
 
-**Title:** Your Project Title Here
+**Title:** Your Project Title Here, vì k muốn lãng quên mọi ng, dự án này nhằm đánh dấu sự hỗn loạn và trật tự
 
-**Purpose:** what you can benefit from this?
+**Purpose:** what you can benefit from this? reduce 200km to 80
 This project is designed to solve unsolable quation quality/quatity . By implementing an Asynchorous efficient and low-cost system for task management, it enhances productivity, minimizes event loop delays, and improves mental health. When everything matching exactly what I had planned with actual real time report and authority review. This shows that the techniques I use are correct. I volunteer to help other get stuck in freeze duration due to war, chaos, or getting lost in the forest or isolated or being trapped etc from dependence to become independent once again
 
-**Core Features:**
+**Core Features:**how it help? giúp cánh lái xế lái xe, 
 - **Asynchronous Task Handling:**
   - Tasks are managed out of order, prioritizing easy-to-complete actions first to maintain momentum.
   - Incorporates real-time file updates to adapt to ongoing needs effectively.
