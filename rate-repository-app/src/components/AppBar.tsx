@@ -24,12 +24,21 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   const navigate = useNavigate(); // Hook to programmatically navigate
 
+  // Navigation handlers for different routes
   const handleCreateReview = () => {
     navigate('/create-review'); // Navigate to the ReviewForm route
   };
 
   const handleMyReviews = () => {
     navigate('/my-reviews'); // Navigate to the MyReviews route
+  };
+
+  const handlePhonebook = () => {
+    navigate('/phonebook'); // Navigate to the Phonebook route
+  };
+
+  const handleGiveFeedback = () => {
+    navigate('/give-feedback'); // Navigate to the Give Feedback route (You can define the '/give-feedback' route in your app)
   };
 
   return (
@@ -47,7 +56,7 @@ const AppBar = () => {
 
         {/* Tab for Sign Up */}
         <Link to="/sign-up">
-          <Text style={styles.tab}>Sign Up</Text>
+          <Text style={styles.tab}>Anecdote</Text>
         </Link>
 
         {/* Tab for My Reviews */}
@@ -64,9 +73,20 @@ const AppBar = () => {
         <Pressable onPress={handleCreateReview}>
           <Text style={styles.tab}>Create a Review</Text>
         </Pressable>
+
+        {/* Button for Phonebook */}
+        <Pressable onPress={handlePhonebook}>
+          <Text style={styles.tab}>Phonebook</Text> {/* Phonebook tab */}
+        </Pressable>
+
+        {/* Button for Give Feedback */}
+        <Pressable onPress={handleGiveFeedback}>
+          <Text style={styles.tab}>Give Feedback</Text> {/* Give Feedback tab */}
+        </Pressable>
       </ScrollView>
     </View>
   );
 };
 
 export default AppBar;
+
