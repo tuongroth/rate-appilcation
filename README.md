@@ -2,39 +2,34 @@
 
 ## Project Overview
 
-Purpose:
-This project is designed to assist individuals in navigating and overcoming moments of "freeze" or decision paralysis, where progress feels impossible. By implementing an efficient and low-cost system for task management, it enhances productivity, minimizes delays, and improves mental health. The approach focuses on breaking complex challenges into manageable, asynchronous tasks to maintain progress and reduce stress.
+**Title:** Your Project Title Here
 
-Core Features:
-Asynchronous Task Handling:
-
-Tasks are managed out of order, prioritizing easy-to-complete actions first to maintain momentum.
-Incorporates real-time file updates to adapt to ongoing needs effectively.
-Progress Visualization:
-
-Tracks progress in real time, offering a clear picture of completed and pending tasks.
-Includes feedback or reviews from authorities to ensure validation and guidance.
-Low-Effort Workflow:
-
-Reduces energy and time costs by breaking tasks into independent, incremental layers.
-Ensures that tasks remain manageable and do not overwhelm users.
-Adaptive Timeline:
-
-Dynamically adjusts to real-world challenges, helping users transition from a "slow" to "speed" state.
-Especially beneficial for long-term PTSD or other mental health conditions that impact consistency.
-User-Friendly Interface:
-
-Simplified design ensures accessibility for users of all backgrounds, including those without technical expertise.
-Mental Health Support:
-
-Integrates anxiety-reducing strategies and helps users avoid decision paralysis.
-Encourages healthier workflows and promotes confidence in managing tasks effectively.
+**Purpose:** what you can benefit from this?
+This project is designed to solve unsolable quation quality/quatity . By implementing an Asynchorous efficient and low-cost system for task management, it enhances productivity, minimizes event loop delays, and improves mental health. When everything matching exactly what I had planned with actual real time report and authority review. This shows that the techniques I use are correct. I volunteer to help other get stuck in freeze duration due to war, chaos, or getting lost in the forest or isolated or being trapped etc from dependence to become independent once again
 
 **Core Features:**
-- User authentication (login, registration).
-- CRUD operations (create, read, update, delete).
-- Integration with external APIs (if applicable).
-- Responsive design and mobile-first approach.
+- **Asynchronous Task Handling:**
+  - Tasks are managed out of order, prioritizing easy-to-complete actions first to maintain momentum.
+  - Incorporates real-time file updates to adapt to ongoing needs effectively.
+
+- **Progress Visualization:**
+  - Tracks progress in real time, offering a clear picture of completed and pending tasks.
+  - Includes feedback or reviews from authorities to ensure validation and guidance.
+
+- **Low-Effort Workflow:**
+  - Reduces energy and time costs by breaking tasks into independent, incremental layers.
+  - Ensures that tasks remain manageable and do not overwhelm users.
+
+- **Adaptive Timeline:**
+  - Dynamically adjusts to real-world challenges, helping users transition from a "slow" to "speed" state.
+  - Especially beneficial for long-term PTSD or other mental health conditions that impact consistency.
+
+- **User-Friendly Interface:**
+  - Simplified design ensures accessibility for users of all backgrounds, including those without technical expertise.
+
+- **Mental Health Support:**
+  - Integrates anxiety-reducing strategies and helps users avoid decision paralysis.
+  - Encourages healthier workflows and promotes confidence in managing tasks effectively.
 
 **Technology Stack:**
 - **Frontend:** React (or your choice of framework).
@@ -46,7 +41,7 @@ Encourages healthier workflows and promotes confidence in managing tasks effecti
 
 ## Live Demo
 
-- **Frontend:** [https://your-app-name.netlify.app]([https://your-app-name.netlify.app](https://rate-appilcation.fly.dev/))
+- **Frontend:** [https://your-app-name.netlify.app](https://your-app-name.netlify.app)
 - **Backend API:** [https://your-backend.herokuapp.com](https://your-backend.herokuapp.com)
 
 ---
@@ -71,7 +66,7 @@ Encourages healthier workflows and promotes confidence in managing tasks effecti
 
 ## Work Hours Log
 
-[Work Hours Log]([link-to-hours-log.md](https://drive.google.com/drive/u/0/home))
+[Work Hours Log](https://drive.google.com/file/d/1-svA1QXAkW1CNQbw-_i_grWY4c9N9Q3c/view))
 
 - **Total Hours Spent:** XX hours
 - **Breakdown:**
@@ -154,14 +149,15 @@ npm test
 
 ## Credits and Acknowledgments
 
-- Credit any tutorials, libraries, or resources used (e.g., “Used React Router documentation for navigation implementation”).
-- Acknowledge collaborators if applicable.
+-Async and performance
+-Philip Roberts called What the heck is the event loop anyway?https://www.youtube.com/watch?v=8aGhZQkoFbQ
+-Mehilainen, Monika, Posti
 
 ---
 
 ## Contact
 
-**Author:** Your Name  
-**GitHub:** [https://github.com/your-profile](https://github.com/your-profile)  
-**Email:** your.email@example.com
+**Author:** TuongRoth  
+**GitHub:** (https://github.com/tuongroth/rate-appilcation)
+**Email:** rothtrancattuong0703@gmail.com
 
