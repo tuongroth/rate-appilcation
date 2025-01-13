@@ -86,9 +86,5 @@ npm test
 
 ---
 
-### Example MongoDB connection URL:
-```javascript
-const mongoUrl = 'mongodb+srv://fullstack:2r6FcH9cLQRdnXHJ@cluster0.xgr0xci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-```
 
 
