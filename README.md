@@ -18,7 +18,7 @@ This project addresses the conflict between quality and quantity in task managem
   - ChatGPT for brainstorming and quick answers. 
   - CI/CD pipelines for automated testing and deployment.Ex: Used to send notifications via Discord webhook
 
-### **Authority Review**  .
+### **Decision-Making Tools**  .
 - **JWT and APIs**: Secure authentication using private and public keys to prevent fraud and unauthorized access. E.g: Endpoint: curl -X GET http://localhost:8001/ -"Authorization: Bearer <your-token>")
 - **MongoDB**: Database management for login validation and data storage, with db.json as a starting point. E.g: Connection string:
 'mongodb+srv://fullstack:2r6FcH9cLQRdnXHJ@cluster0.xgr0xci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
@@ -32,7 +32,7 @@ This project addresses the conflict between quality and quantity in task managem
 Feedback from reliable sources and stakeholders for improvement: Mehilainen, Posti, Monika, TE, Haaga Helia
 
 ### **User Insights**  
-- **On JWT & APIs**: Using private and public keys helps confirm critical security information, preventing fraud and misuse of fake information that could lead to misunderstanding or unexpected outcomes."_  
+- **On JWT & APIs**: "Using private and public keys helps confirm critical security information, preventing fraud and misuse of fake information that could lead to misunderstanding or unexpected outcomes."_  
 - **On MongoDB**:"I prefer MongoDB as it allows me to clearly identify endpoints and access reliable sources for help."
 - **On Visual Studio & Private IPs**:"Managing actual private IPs through Visual Studio has reduced confusion between fake and authentic information, giving me more confidence in my capabilities."_  
 - **On Axios & Error Handling**:"This approach saves time by avoiding unnecessary brainstorming about potential issues, letting me confirm if I'm on the right track with authorities."_  
