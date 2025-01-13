@@ -19,13 +19,15 @@ This project addresses the conflict between quality and quantity in task managem
   - CI/CD pipelines for automated testing and deployment.Ex: Used to send notifications via Discord webhook
 
 ### **Authority Review**  .
-- **JWT and APIs**: Secure authentication using private and public keys to prevent fraud and unauthorized access.  
-- **MongoDB**: Database management for login validation and data storage, with db.json as a starting point.
-- **Fly.io**: Hosting backend services, enabling multi-port terminal operations.  
-- **Docker Images & Visual Studio**: Fetch results faster and ensure consistency across environments.  
-- **Private IP Management**: Using Visual Studio to handle actual private IPs for enhanced security.
-- **Axios & RESTful APIs**: Streamlined communication between client and server with proper error handling (e.g., 200 for success, 404 for not found).  
-- **Apollo Client Integration**: Enhancing real-time updates and facilitating efficient data fetching.  
+- **JWT and APIs**: Secure authentication using private and public keys to prevent fraud and unauthorized access. E.g: Endpoint: curl -X GET http://localhost:8001/ -"Authorization: Bearer <your-token>")
+- **MongoDB**: Database management for login validation and data storage, with db.json as a starting point. E.g: Connection string:
+'mongodb+srv://fullstack:2r6FcH9cLQRdnXHJ@cluster0.xgr0xci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+- **Fly.io**: Hosting backend services, enabling multi-port terminal operations. E.g Localhost:3001/api/person
+- **Visual Studio**: Fetch results faster and ensure consistency across environments. E.g PORT=8001 NODE_ENV=production node app.js
+- **Private IP Management**: Using Visual Studio to handle actual private IPs for enhanced security.(e.g curl -X GET http://192.168.1.100:8001/)
+- **Axios & RESTful APIs**: Streamlined communication between client and server with proper error handling (e.g., curl -X GET http://localhost:3001/api/person
+200 for success, 404 for not found).  
+- **Apollo Client Integration**: Enhancing real-time updates and facilitating efficient data fetching.  E.g export GRAPHQL_URI="http://localhost:4000/graphql"
 - **GitHub Actions**: Automated workflows to track performance and ensure consistent task execution.
 Feedback from reliable sources and stakeholders for improvement: Mehilainen, Posti, Monika, TE, Haaga Helia
 
