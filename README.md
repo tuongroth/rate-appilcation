@@ -11,12 +11,12 @@ This project addresses the conflict between quality and quantity in task managem
 ## Key Features  
 
 ### Core Functionalities:
-- **Tools**:  
-  - GitHub history for tracking progress.  
-  - Submission system for performance validation.  
-  - SMS phone book integration for task notifications.  
-  - ChatGPT for brainstorming and quick answers.  
-  - CI/CD pipelines for automated testing and deployment.  
+- **Timestamp Tools**:  
+  - GitHub history for tracking progress:Ex Commit History (12/11 - 15/11/2025)
+  - Submission system for performance validation: Ex Course marked on 30/12/2024, exam passed on 06/01/2025
+  - SMS phone book integration for task notifications:Ex Reservation made on 17/06/2024 at 13:00.
+  - ChatGPT for brainstorming and quick answers. 
+  - CI/CD pipelines for automated testing and deployment.Ex: Used to send notifications via Discord webhook
 
 ### **Authority Review**  .
 - **JWT and APIs**: Secure authentication using private and public keys to prevent fraud and unauthorized access.  
