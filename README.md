@@ -42,7 +42,7 @@ Feedback from reliable sources and stakeholders for improvement: Mehilainen, Pos
 ## Work Hours Log
 
 [Work Hours Log](https://drive.google.com/file/d/1-svA1QXAkW1CNQbw-_i_grWY4c9N9Q3c/view)
-**For an e-commerce app: Adding a wishlist, review and actual Project Team:** [Project Team Drive](https://drive.google.com/drive/u/0/home)  
+**For an e-commerce app: Adding a wishlist, review and actual Project Team:** [Project Team Drive](https://drive.google.com/file/d/1fZyVr1OBb6wCPVSwHwATmiEWOD8i_tmH/view?usp=sharing))  
 **Working Hours Log:** [Working Hours Log Drive](https://drive.google.com/drive/u/0/home)
 **Project Tunnel URL:** [Tunnel Link](https://ba0f-31-216-224-152.ngrok-free.app)
 
